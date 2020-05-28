@@ -47,7 +47,7 @@ class YOLOWriter:
 
         classIndex = classList.index(boxName)
 
-        return classIndex, xcen, ycen, w, h
+        return classIndex, xcen, ycen, w, h, box['difficult']
 
     def save(self, classList=[], targetFile=None):
 
@@ -67,9 +67,9 @@ class YOLOWriter:
 
 
         for box in self.boxlist:
-            classIndex, xcen, ycen, w, h = self.BndBox2YoloLine(box, classList)
+            classIndex, xcen, ycen, w, h, difficult = self.BndBox2YoloLine(box, classList)
             # print (classIndex, xcen, ycen, w, h)
-            out_file.write("%d %.6f %.6f %.6f %.6f\n" % (classIndex, xcen, ycen, w, h))
+            out_file.write("%d %.6f %.6f %.6f %.6f %d\n" % (classIndex, xcen, ycen, w, h, difficult))
 
         # print (classList)
         # print (out_class_file)
